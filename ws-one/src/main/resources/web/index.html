@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Web Socket Example using STOMP and MQTT for notifications</title>
+        <link rel="stylesheet" href="css/socket.css">
+        <script src="js/stomp.js"></script>
+        <script src="js/stomp_push.js"></script>
+        <script src="js/mqttws31.js"></script>
+        <script src="js/mqtt_push.js"></script>
+        <script src="js/websocket.js"></script>
+        <script src="js/app.js"></script>
+    </head>
+    <body>
+        <h1>Web Socket Example using STOMP and MQTT for notifications</h1>
+        <h2>Enter a WebSocket request</h2>
+        <form name="inputform">
+            <input type="text" name="message" id="message" placeholder="Enter text to be sent" autofocus>
+            <input type="submit" value="Send Request">
+        </form>
+        <h2>WebSocket response</h2>
+        <textarea id="responseText" wrap="off" rows="7" cols="60" readonly></textarea>
+        <h2>STOMP notifications</h2>
+        <textarea id="stompNotification" wrap="off" rows="7" cols="60" readonly></textarea>
+        <h2>MQTT notifications</h2>
+        <textarea id="mqttNotification" wrap="off" rows="7" cols="60" readonly></textarea>
+        <h2>Log messages</h2>
+        <textarea id="debug" wrap="off" rows="7" cols="60" readonly></textarea>
+    </body>
+</html>

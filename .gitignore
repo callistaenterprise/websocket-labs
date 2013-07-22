@@ -1,6 +1,16 @@
 *.class
 
+# Eclipse files #
+.settings
+.classpath
+.project
+
+# Maven files #
+target
+
 # Package Files #
 *.jar
 *.war
 *.ear
+
+activemq-data
