@@ -31,12 +31,11 @@ public class CustomTextFrameHandler extends SimpleChannelInboundHandler<TextWebS
         InetSocketAddress adr = (InetSocketAddress)ctx.channel().remoteAddress();
         String clientHost = adr.getHostString();
         LOG.debug("WS-One got: {} from: {}", request, clientHost);
-        String response = requestHandler(request);
+        String response = requestHandler(clientHost, request);
 		ctx.channel().write(new TextWebSocketFrame(response));
-        publisher.publish("[" + clientHost + "] - " + response);
     }
 	
-	public String requestHandler(String request) {
+	public String requestHandler(String clientHost, String request) {
 		String response = null;
 		try {
 			String req = request.trim().toLowerCase();
@@ -63,7 +62,9 @@ public class CustomTextFrameHandler extends SimpleChannelInboundHandler<TextWebS
 			ex.printStackTrace();
 		}
 		
-		return response;
+        publisher.publish("[" + clientHost + "] - " + response);
+
+        return response;
 	}
 
 	private String getLedStatus() {

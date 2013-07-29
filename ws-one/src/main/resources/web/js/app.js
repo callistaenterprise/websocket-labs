@@ -17,6 +17,11 @@
             alert("Your browser does not support Web Socket.");
         }
 
+        function send(event) {
+        	socket.send(event);
+        }
+        document.forms.inputform.addEventListener('submit', send, false);
+
         function appendWebSocketTextArea(newData) {
         	appendTextArea(newData, 'responseText');
         }
@@ -60,11 +65,6 @@
  
             return h + ":" + m + ":" + s + "." + ms;
         }
-
-        function send(event) {
-        	socket.send(event);
-        }
-        document.forms.inputform.addEventListener('submit', send, false);
     }
     window.addEventListener('load', function() { new App(); }, false);
 })();

@@ -1,13 +1,13 @@
 package se.callista.websocketlabs.wsone.server;
 
 import static se.callista.websocketlabs.wsone.server.Constants.*;
+import static se.callista.websocketlabs.wsone.amq.ActiveMQParent.runActiveMQBroker;
+import static se.callista.websocketlabs.wsone.http.file.HttpStaticFileServer.runHttpStaticFileServer;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import se.callista.websocketlabs.wsone.amq.ActiveMQParent;
 import se.callista.websocketlabs.wsone.amq.Publisher;
-import se.callista.websocketlabs.wsone.http.file.HttpStaticFileServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
@@ -33,7 +33,7 @@ public class Server {
     public void run() throws Exception {
 
     	// Start embedded ActiveMQ broker with vm and ws-transports 
-    	ActiveMQParent.runActiveMQBroker();
+    	runActiveMQBroker();
     	
     	// Initiate a publisher
     	final Publisher publisher = new Publisher();
@@ -42,7 +42,7 @@ public class Server {
         runWebSocketServer(publisher);
         
     	// Start HTTP Static File server
-        new HttpStaticFileServer(DEFAULT_HTTP_STATIC_PORT).run();
+        runHttpStaticFileServer();
     }
 
     public void runWebSocketServer(final Publisher publisher) throws Exception {

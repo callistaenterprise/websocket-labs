@@ -38,12 +38,16 @@ public abstract class ActiveMQParent {
 	private Session session = null;
 	private Destination destination = null;
 
-	public ActiveMQParent(String activeMqUrl, String topicName) throws JMSException {
-		connectionFactory = new ActiveMQConnectionFactory(activeMqUrl);
-		connection = connectionFactory.createConnection();
-		connection.start();
-		session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-		destination = session.createTopic(topicName);
+	public ActiveMQParent(String activeMqUrl, String topicName) {
+		try {
+			connectionFactory = new ActiveMQConnectionFactory(activeMqUrl);
+			connection = connectionFactory.createConnection();
+			connection.start();
+			session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			destination = session.createTopic(topicName);
+		} catch (JMSException e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	public Session getSession() {

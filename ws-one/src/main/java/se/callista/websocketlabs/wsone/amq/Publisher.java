@@ -16,28 +16,40 @@ public class Publisher extends ActiveMQParent {
 
 	MessageProducer producer = null;
 
-	public Publisher() throws JMSException {
+	public Publisher() {
 		this(DEFAULT_AMQ_URL, DEFAULT_AMQ_NOTIFY_TOPIC);
 	}
 
-	public Publisher(String activeMqUrl, String topicName) throws JMSException {
+	public Publisher(String activeMqUrl, String topicName) {
 		super(activeMqUrl, topicName);
-		producer = getSession().createProducer(getDestination());
+		try {
+			producer = getSession().createProducer(getDestination());
+		} catch (JMSException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public void publish(String message) throws JMSException {
+	public void publish(String message) {
 		publish(message, DeliveryMode.NON_PERSISTENT);
 	}
 
-	public void publish(String message, int deliveryMode) throws JMSException {
-		TextMessage textMessage = getSession().createTextMessage(message);
-		textMessage.setJMSDeliveryMode(deliveryMode);
-		producer.send(textMessage);
-		LOG.debug("Message sent to subscribers: '{}'", message);
+	public void publish(String message, int deliveryMode) {
+		try {
+			TextMessage textMessage = getSession().createTextMessage(message);
+			textMessage.setJMSDeliveryMode(deliveryMode);
+			producer.send(textMessage);
+			LOG.debug("Message sent to subscribers: '{}'", message);
+		} catch (JMSException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
-	public void close() throws JMSException {
-		producer.close();
-		super.close();
+	public void close() {
+		try {
+			producer.close();
+			super.close();
+		} catch (JMSException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package se.callista.websocketlabs.wsone.http.file;
 
+import static se.callista.websocketlabs.wsone.server.Constants.DEFAULT_HTTP_STATIC_PORT;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +16,11 @@ public class HttpStaticFileServer {
 
 	private final int http_static_port;
 
-    public HttpStaticFileServer(int http_static_port) {
+    public static void runHttpStaticFileServer() throws Exception {
+        new HttpStaticFileServer(DEFAULT_HTTP_STATIC_PORT).run();
+    }
+
+	public HttpStaticFileServer(int http_static_port) {
         this.http_static_port = http_static_port;
     }
 

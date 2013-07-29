@@ -1,6 +1,9 @@
 WS-ONE
 ------
 
+Source code for the blog "C10k: Lightweight Java servers for large scaled realtime WebSocket communication", see: http://blog.callistaenterprise.se
+
+
 mvn clean package
 chmod 777 target/generated-resources/appassembler/jsw/ws-one-server/bin/ws-one-server
 chmod 777 target/generated-resources/appassembler/jsw/ws-one-server/bin/wrapper-macosx-universal-32

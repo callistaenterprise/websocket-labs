@@ -33,7 +33,7 @@ function Sock (url, displayMessage, displayLog) {
     }
 
     this.send = function(event) {
-    	log("Send Web Socket Request")
+    	log("Send Web Socket Request");
         event.preventDefault();
         if (window.WebSocket) {
             if (socket.readyState == WebSocket.OPEN) {
