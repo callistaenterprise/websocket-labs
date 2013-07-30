@@ -1,8 +1,6 @@
 package se.callista.websocketlabs.wsone.rpi.impl;
 
-import se.callista.websocketlabs.wsone.rpi.api.RPi;
-
-public class RPITeststub implements RPi {
+public class RPITeststub extends RPiBaseImpl {
 
 	boolean isLedOn = false;
 	

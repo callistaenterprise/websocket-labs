@@ -1,5 +1,6 @@
 package se.callista.websocketlabs.wsone.server;
 
+import java.math.BigInteger;
 import java.net.InetSocketAddress;
 
 import org.slf4j.Logger;
@@ -38,7 +39,10 @@ public class CustomTextFrameHandler extends SimpleChannelInboundHandler<TextWebS
 	public String requestHandler(String clientHost, String request) {
 		String response = null;
 		try {
-			String req = request.trim().toLowerCase();
+			String[] args = request.trim().toLowerCase().split(" ");
+			if (args.length == 0) return getUnknownCommandError(request);
+
+			String req = args[0];
 	
 			String currentLedStatus = getLedStatus();
 	
@@ -52,14 +56,18 @@ public class CustomTextFrameHandler extends SimpleChannelInboundHandler<TextWebS
 				rpi.setLedOn(req.equals("on"));
 				response = "LED is now " + getLedStatus() + " (was " + currentLedStatus + ")";
 				break;
-	
+
+			case "fibonacci":
+				response = calculateFibonacci(request, args);
+				break;
+				
 			default:
-				response = "ERROR. Unknown command: \"" + request + "\", Usage: \"status|on|off\""; 
+				response = getUnknownCommandError(request); 
 				break;
 			}
 		} catch (Exception ex) {
-			response = "ERROR. Failed to process command: \"" + request + "\". See log for error: " + ex.getMessage(); 
 			ex.printStackTrace();
+			response = getProcessingError(request, ex); 
 		}
 		
         publisher.publish("[" + clientHost + "] - " + response);
@@ -69,5 +77,35 @@ public class CustomTextFrameHandler extends SimpleChannelInboundHandler<TextWebS
 
 	private String getLedStatus() {
 		return (rpi.isLedOn()) ? "on" : "off";
+	}
+
+	private String calculateFibonacci(String request, String[] args) {
+		// We require two args for the fibonacci command
+		if (args.length == 1) return getUnknownCommandError(request);
+
+		try {
+			int no = Integer.parseInt(args[1]);
+			
+			// Require that no is in the range 0..100000
+			if ((no < 0) || no > 100000) return getUnknownCommandError(request); 
+
+			long t = System.currentTimeMillis();
+	    	BigInteger result = rpi.fibonacci(no);
+	    	t = System.currentTimeMillis() - t;
+			return "fibonacci(" + no + ") took " + t + " ms. Result: " + result;
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return getProcessingError(request, ex); 
+		}
+		
+	}
+
+	private String getUnknownCommandError(String request) {
+		return "ERROR. Unknown command: \"" + request + "\", Usage: \"status|on|off|fibonacci 0..100000\"";
+	}
+
+	private String getProcessingError(String request, Exception ex) {
+		return "ERROR. Failed to process command: \"" + request + "\". See log for error: " + ex.toString();
 	}
 }

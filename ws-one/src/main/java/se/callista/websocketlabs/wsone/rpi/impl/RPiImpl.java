@@ -1,9 +1,8 @@
 package se.callista.websocketlabs.wsone.rpi.impl;
 
-import se.callista.websocketlabs.wsone.rpi.api.RPi;
 import se.callista.websocketlabs.wsone.rpi.framboos.OutPin;
 
-public class RPiImpl implements RPi {
+public class RPiImpl extends RPiBaseImpl {
 
 	private final int LED_PIN_NO = 0;
 	private OutPin pin = null;
