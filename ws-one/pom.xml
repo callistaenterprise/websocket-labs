@@ -4,7 +4,7 @@
   <groupId>se.callista.websocketlabs</groupId>
   <artifactId>ws-one</artifactId>
   <name>ws-one</name>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.1.0-SNAPSHOT</version>
 
 	<properties>
 <!-- 
