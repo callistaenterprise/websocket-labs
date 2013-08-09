@@ -33,7 +33,7 @@ public class HttpStaticFileServer {
              .channel(NioServerSocketChannel.class)
              .childHandler(new HttpStaticFileServerInitializer());
             LOG.info("WS-One: HTTP Static File server started at port: " + http_static_port);
-
+            LOG.info("WS-One: - Developent URL: http://localhost:" + http_static_port + "/target/classes/web/index.html");
             b.bind(http_static_port).sync().channel().closeFuture().sync();
         } finally {
             bossGroup.shutdownGracefully();
