@@ -1,0 +1,11 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:riv:itintegration:registry:1" xmlns:urn1="urn:riv:itintegration:engagementindex:FindContentResponder:1">
+   <soapenv:Header>
+      <urn:LogicalAddress>LOADTEST</urn:LogicalAddress>
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn1:FindContent>
+         <urn1:registeredResidentIdentification>196903136759</urn1:registeredResidentIdentification>
+         <urn1:serviceDomain>domain</urn1:serviceDomain>
+      </urn1:FindContent>
+   </soapenv:Body>
+</soapenv:Envelope>
