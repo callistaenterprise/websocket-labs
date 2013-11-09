@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                      http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+  version="3.1"
+  metadata-complete="true">
+
+    <!-- Old school blocking IO servlets -->
+    <servlet>
+      <servlet-name>blocking-bytecounter</servlet-name>
+      <servlet-class>se.callista.websocketlabs.wstwo.blocking.ByteCounter</servlet-class>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>blocking-bytecounter</servlet-name>
+      <url-pattern>/blocking/bytecounter</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Non-blocking IO servlets -->
+    <servlet>
+      <servlet-name>bytecounter</servlet-name>
+      <servlet-class>se.callista.websocketlabs.wstwo.nonblocking.ByteCounter</servlet-class>
+      <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>bytecounter</servlet-name>
+      <url-pattern>/nonblocking/bytecounter</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+      <servlet-name>numberwriter</servlet-name>
+      <servlet-class>se.callista.websocketlabs.wstwo.nonblocking.NumberWriter</servlet-class>
+      <async-supported>true</async-supported>
+    </servlet>
+    <servlet-mapping>
+      <servlet-name>numberwriter</servlet-name>
+      <url-pattern>/nonblocking/numberwriter</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+
+</web-app>
