@@ -1,0 +1,28 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.7.+'
+    }
+}
+
+apply plugin: 'android'
+
+android {
+    buildToolsVersion "19.0.3"
+    compileSdkVersion 19
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+//    compile("joda-time:joda-time:2.2")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.9'
+}

@@ -8,8 +8,11 @@
 # Maven files #
 target
 
+# Gradle files #
+build
+
 # Package Files #
-*.jar
+# *.jar
 *.war
 *.ear
 
