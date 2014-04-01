@@ -18,7 +18,6 @@ apply plugin: 'war'
 // version = '1.0.0-SNAPSHOT'
 // group = 'se.callista.websocketlabs'
 
-// jar {
 war {
     baseName = 'spring-mvc-asynch-teststub'
     version =  '1.0.0-SNAPSHOT'
@@ -34,6 +33,8 @@ repositories {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("javax.xml.bind:jaxb-api:2.1")
+    compile("com.sun.xml.bind:jaxb-impl:2.1.9")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

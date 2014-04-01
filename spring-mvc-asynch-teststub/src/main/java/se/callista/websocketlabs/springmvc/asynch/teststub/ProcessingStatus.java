@@ -1,10 +1,23 @@
 package se.callista.websocketlabs.springmvc.asynch.teststub;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class ProcessingStatus {
 
+    @XmlElement
     private final String status;
+
+    @XmlElement
     private final int processingTimeMs;
 
+    public ProcessingStatus() {
+        status = "UNKNOWN";
+        processingTimeMs = -1;
+        
+    }
+    
     public ProcessingStatus(String status, int processingTimeMs) {
         this.status = status;
         this.processingTimeMs = processingTimeMs;

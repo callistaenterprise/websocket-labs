@@ -14,7 +14,6 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 apply plugin: 'war'
 
-// jar {
 war {
     baseName = 'spring-mvc-asynch'
     version =  '1.0.0-SNAPSHOT'
@@ -29,6 +28,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
 	compile("com.ning:async-http-client:1.8.4")
+    compile("javax.xml.bind:jaxb-api:2.1")
+    compile("com.sun.xml.bind:jaxb-impl:2.1.9")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
