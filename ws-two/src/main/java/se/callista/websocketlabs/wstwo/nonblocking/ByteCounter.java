@@ -69,6 +69,9 @@ public class ByteCounter extends HttpServlet {
         private final ServletInputStream sis;
         private final ServletOutputStream sos;
 
+    	private final long EXECUTION_TIME_MS = 1000;
+    	private long executionStart = 0;
+    	
         private volatile boolean readFinished = false;
         private volatile long totalBytesRead = 0;
         private byte[] buffer = new byte[8192];
@@ -84,6 +87,8 @@ public class ByteCounter extends HttpServlet {
             // will be called before the write listener.
             sis.setReadListener(this);
             sos.setWriteListener(this);
+
+        	logger.debug("CounterListener initiated...");
         }
 
         @Override
@@ -107,7 +112,7 @@ public class ByteCounter extends HttpServlet {
         public void onAllDataRead() throws IOException {
 
         	logger.debug("onAllDataRead() called");
-        	
+//        	executionStart = System.currentTimeMillis();
         	readFinished = true;
 
             // If sos is not ready to write data, the call to isReady() will
@@ -124,6 +129,9 @@ public class ByteCounter extends HttpServlet {
 
         	logger.debug("onWritePossible() called");
         	
+//        	long executionTime = System.currentTimeMillis() - executionStart;
+//        	readFinished = executionTime > EXECUTION_TIME_MS;
+        	
         	if (readFinished) {
                 // Must be ready to write data if onWritePossible was called
                 String msg = "Total bytes written = [" + totalBytesRead + "]";
@@ -131,6 +139,8 @@ public class ByteCounter extends HttpServlet {
                 ac.complete();
 
         		logger.debug("Post-processing done, consumed [" + totalBytesRead + "] bytes");
+        	} else {
+//        		logger.debug("Data not yet available, only got " + executionTime + " ms");
         	}
         }
 

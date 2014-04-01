@@ -18,3 +18,5 @@ build
 
 activemq-data
 .gradle
+spring-mvc-asynch.vpp.working
+*.vpp~*

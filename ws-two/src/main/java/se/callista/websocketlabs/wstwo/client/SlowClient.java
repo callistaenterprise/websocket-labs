@@ -11,9 +11,9 @@ import java.net.URLConnection;
 
 public class SlowClient implements Runnable {
 
-	private static long sleepTime = 25L;
-	private static String endpointAddress = "http://localhost:8080/ws-two/nonblocking/bytecounter";
-//	private static String endpointAddress = "http://localhost:8080/ws-two/blocking/bytecounter";
+	private static long sleepTime = 10L;
+//	private static String endpointAddress = "http://localhost:8080/ws-two/nonblocking/bytecounter";
+	private static String endpointAddress = "http://localhost:8080/ws-two/blocking/bytecounter";
 	
     public static void main(String[] args) throws Exception {
 		while (true) {
@@ -25,7 +25,10 @@ public class SlowClient implements Runnable {
     @Override
 	public void run() {
         try {
+        	long ts = System.currentTimeMillis();
 			slowClient(endpointAddress);
+			ts = System.currentTimeMillis() - ts;
+			System.err.println("Response time: " + ts);
 		} catch (IOException | InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -56,9 +59,9 @@ public class SlowClient implements Runnable {
         	out.write('a');
             out.flush();
             int ts = 1000;
-			System.err.println("Written " + i + " bytes, sleep " + ts  + " ms...");
+//			System.err.println("Written " + i + " bytes, sleep " + ts  + " ms...");
 			try {Thread.sleep(ts);} catch (InterruptedException e) {}
-			System.err.println("Write continues...");
+//			System.err.println("Write continues...");
         }
         out.close();
     }
