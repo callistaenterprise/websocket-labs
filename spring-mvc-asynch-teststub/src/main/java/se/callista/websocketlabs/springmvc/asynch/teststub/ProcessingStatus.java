@@ -15,7 +15,6 @@ public class ProcessingStatus {
     public ProcessingStatus() {
         status = "UNKNOWN";
         processingTimeMs = -1;
-        
     }
     
     public ProcessingStatus(String status, int processingTimeMs) {
@@ -30,5 +29,4 @@ public class ProcessingStatus {
     public int getProcessingTimeMs() {
         return processingTimeMs;
     }
-
 }
