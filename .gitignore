@@ -5,10 +5,15 @@
 .classpath
 .project
 
+# IntelliJ files #
+.idea
+local.properties
+
 # Maven files #
 target
 
 # Gradle files #
+.gradle
 build
 
 # Package Files #
@@ -16,7 +21,10 @@ build
 *.war
 *.ear
 
+# ActiveMQ files #
 activemq-data
-.gradle
+
+# Visual Paradigm files #
 spring-mvc-asynch.vpp.working
 *.vpp~*
+

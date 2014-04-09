@@ -12,7 +12,7 @@ apply plugin: 'android'
 
 android {
     buildToolsVersion "19.0.3"
-    compileSdkVersion 19
+    compileSdkVersion 17
 }
 
 repositories {
@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-//    compile("joda-time:joda-time:2.2")
+    compile("joda-time:joda-time:2.3")
 }
 
 task wrapper(type: Wrapper) {
