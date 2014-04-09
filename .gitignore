@@ -8,6 +8,7 @@
 # IntelliJ files #
 .idea
 local.properties
+*.iml
 
 # Maven files #
 target
